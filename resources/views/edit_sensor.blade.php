@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Sensor')
+@section('title', 'Edit Sensor')
 
 @section('content')
 
@@ -9,11 +9,9 @@
     <div class="form-card">
 
         <h1 class="form-title">
-            Tambah Data Sensor
+            Edit Data Sensor
         </h1>
 
-
-        
         @if ($errors->any())
             <div class="error-box">
                 <ul>
@@ -24,61 +22,45 @@
             </div>
         @endif
 
-
-        <form method="POST" action="{{ route('sensor.store') }}">
+        <form method="POST" action="{{ route('sensor.update', $sensor->id) }}">
             @csrf
+            @method('PUT')
 
-           
             <div class="form-group">
                 <label>Nama Sensor</label>
-
                 <input
                     type="text"
                     name="nama_sensor"
                     placeholder="Contoh: Sensor Suhu"
-                    value="{{ old('nama_sensor') }}"
+                    value="{{ old('nama_sensor', $sensor->nama_sensor) }}"
                     required
                 >
             </div>
 
-
-            
             <div class="form-group">
                 <label>Nilai Sensor</label>
-
                 <input
                     type="number"
                     name="data"
                     placeholder="Contoh: 25"
-                    value="{{ old('data') }}"
+                    value="{{ old('data', $sensor->data) }}"
                     required
                 >
             </div>
 
-
-            
             <div class="btn-group">
-
                 <button type="submit" class="btn-primary">
-                    Simpan Data
+                    Update Data
                 </button>
-
                 <a href="{{ route('sensor.index') }}" class="btn-secondary">
                     Kembali
                 </a>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
 
-
-
 <style>
-
 /* CENTER */
 .form-wrapper {
     min-height: 80vh;
@@ -86,7 +68,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 /* CARD */
 .form-card {
@@ -97,7 +78,6 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-
 /* TITLE */
 .form-title {
     font-size: 26px;
@@ -105,7 +85,6 @@
     margin-bottom: 25px;
     color: #1e293b;
 }
-
 
 /* INPUT */
 .form-group {
@@ -131,10 +110,9 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    border-color: #004cff;
+    box-shadow: 0 0 0 2px rgba(0,76,255,0.15);
 }
-
 
 /* BUTTON */
 .btn-group {
@@ -146,7 +124,7 @@ input:focus {
 .btn-primary {
     flex: 1;
     padding: 12px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #004cff, #0037b3);
     color: white;
     border: none;
     border-radius: 8px;
@@ -174,7 +152,6 @@ input:focus {
     background: #f1f5f9;
 }
 
-
 /* ERROR */
 .error-box {
     background: #fee2e2;
@@ -189,7 +166,5 @@ input:focus {
     margin: 0;
     padding-left: 18px;
 }
-
 </style>
-
 @endsection
